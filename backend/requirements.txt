@@ -1,3 +1,2 @@
 Django>=4.2,<5
 djangorestframework>=3.15,<4
-djangorestframework-authtoken>=1.0.0
