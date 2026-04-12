@@ -185,6 +185,15 @@ curl -X POST http://127.0.0.1:8000/api/products/ \
 - `POST /api/login/` - login and receive a token
 - `GET /api/products/` - list products (requires token auth)
 - `POST /api/products/` - create a product (requires token auth)
+- `GET /api/alerts/` - list flood alerts (read-only for public)
+- `POST /api/alerts/` - report a flood alert (requires token auth)
+
+## Project Structure (Clean API)
+
+The project follows a clean API structure:
+- `core/api/serializers.py` - Serializers for all models
+- `core/api/views.py` - Viewsets and API views
+- `core/api/urls.py` - API routing
 
 ## Notes
 

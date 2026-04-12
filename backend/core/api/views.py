@@ -3,14 +3,16 @@ from rest_framework import permissions, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import action
 
-from .models import Product
-from .serializers import (
+from core.models import Product, Alert, WaterLevel, IncidentReport
+from core.api.serializers import (
     LoginSerializer,
     ProductSerializer,
     RegisterSerializer,
     UserSerializer,
+    AlertSerializer,
+    WaterLevelSerializer,
+    IncidentReportSerializer,
 )
 
 
@@ -50,3 +52,21 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+class AlertViewSet(viewsets.ModelViewSet):
+    queryset = Alert.objects.all()
+    serializer_class = AlertSerializer
+    permission_classes = [permissions.AllowAny]  # Alerts should be public usually
+
+
+class WaterLevelViewSet(viewsets.ModelViewSet):
+    queryset = WaterLevel.objects.all()
+    serializer_class = WaterLevelSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class IncidentReportViewSet(viewsets.ModelViewSet):
+    queryset = IncidentReport.objects.all()
+    serializer_class = IncidentReportSerializer
+    permission_classes = [permissions.AllowAny]  # Public reporting
