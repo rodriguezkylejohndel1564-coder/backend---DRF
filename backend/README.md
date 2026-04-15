@@ -108,50 +108,6 @@ For protected endpoints, add this header:
 Authorization: Token <your-token>
 ```
 
-### 4. List products
-
-Request:
-
-```http
-GET /api/products/ HTTP/1.1
-Host: 127.0.0.1:8000
-Authorization: Token <your-token>
-```
-
-### 5. Create a product
-
-Request:
-
-```http
-POST /api/products/ HTTP/1.1
-Host: 127.0.0.1:8000
-Content-Type: application/json
-Authorization: Token <your-token>
-
-{
-  "name": "Sample Product",
-  "description": "A demo product",
-  "price": "19.99"
-}
-```
-
-Response:
-
-```json
-{
-  "id": 1,
-  "name": "Sample Product",
-  "description": "A demo product",
-  "price": "19.99",
-  "created_by": {
-    "id": 1,
-    "username": "alice",
-    "email": "alice@example.com"
-  },
-  "created_at": "2026-04-13T00:00:00Z"
-}
-```
-
 ## Example curl commands
 
 Register:
@@ -170,21 +126,10 @@ curl -X POST http://127.0.0.1:8000/api/login/ \
   -d '{"username": "alice", "password": "password123"}'
 ```
 
-Create product:
-
-```bash
-curl -X POST http://127.0.0.1:8000/api/products/ \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Token <your-token>" \
-  -d '{"name": "Sample Product", "description": "A demo product", "price": "19.99"}'
-```
-
 ## API Endpoints
 
 - `POST /api/register/` - register a new user
 - `POST /api/login/` - login and receive a token
-- `GET /api/products/` - list products (requires token auth)
-- `POST /api/products/` - create a product (requires token auth)
 
 ## Notes
 

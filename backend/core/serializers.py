@@ -1,9 +1,6 @@
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-
-from .models import Product
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,11 +38,3 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Unable to log in with provided credentials.")
         attrs["user"] = user
         return attrs
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    created_by = UserSerializer(read_only=True)
-
-    class Meta:
-        model = Product
-        fields = ("id", "name", "description", "price", "created_by", "created_at")

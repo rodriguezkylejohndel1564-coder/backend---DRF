@@ -1,14 +1,11 @@
 from django.contrib.auth import login
-from rest_framework import permissions, viewsets
+from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import action
 
-from .models import Product
 from .serializers import (
     LoginSerializer,
-    ProductSerializer,
     RegisterSerializer,
     UserSerializer,
 )
@@ -41,12 +38,3 @@ class LoginView(APIView):
             "user": UserSerializer(user).data,
             "token": token.key,
         })
-
-
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
